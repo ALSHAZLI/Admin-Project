@@ -22,11 +22,29 @@ export default function Category() {
 
   const [Category, setCategorys] = useState([]);
 
+  // useEffect(() => {
+    
+    
+  //   Axios.get(`http://localhost:3001/api/categories/${categoryId}`
+  //      ).then((response) => {
+  //       setCategorys(response.data);
+  //   });
+  // },[]);
+
   useEffect(() => {
-    Axios.get(`http://localhost:3001/api/categories/${categoryId}`).then((response) => {
-        setCategorys(response.data);
-    });
-  },[]);
+    const getCats = async () => {
+      try {
+        const res = await userRequest.get(`categories/${categoryId}`);
+        setCategorys(res.data);
+      } catch {}
+    };
+    getCats();
+  }, []);
+
+  // const userRequest = axios.create({
+  //   baseURL: BASE_URL,
+  //   headers: { 'x-auth-token': ` ${TOKEN}` },
+  // });
 
 
   
@@ -68,6 +86,11 @@ setFile(null)
 // console.log(res.data)
 window.location.reload(false);
   }
+
+  // try {
+  //   const res = await userRequest.patch(`categories/${categoryId}`,formData);
+  //   
+  // } catch {}
   const onSubName= async (e)=>{
     let formData=new FormData();
     
@@ -76,7 +99,11 @@ window.location.reload(false);
 
 e.preventDefault()
 
-await Axios.patch(`http://localhost:3001/api/categories/${categoryId}`,formData);
+// await Axios.patch(`http://localhost:3001/api/categories/${categoryId}`,formData);
+
+     await userRequest.patch(`categories/${categoryId}`,formData);
+    
+  
 
 window.location.reload(false);
   }

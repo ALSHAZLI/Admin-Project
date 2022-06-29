@@ -22,9 +22,9 @@ import { useState } from "react";
 
 export default function Sidebar() {
  
-  let Navigate = useNavigate();
+  let navigate = useNavigate();
   const [LoginStatus, setLoginStatus] = useState("")
-  const handleClick = (e) => {
+  const handleClick = (e,redirectPath = "/login") => {
     e.preventDefault();
     Axios.get('http://localhost:3001/api/logout', {
     }).then((response) => {
@@ -37,12 +37,13 @@ export default function Sidebar() {
 
 
         } else {
+          navigate('/',{replace:true})
           setLoginStatus(response.data)
           console.log("Successful")
           localStorage.clear("zxcv", JSON.stringify(response.data));
           // alert('Sucess Registration')
           window.location.reload(false);
-          Navigate('/login')
+          
           }
         }
       )
@@ -56,7 +57,7 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <Link to="/" className="link">
+            <Link to="/home" className="link">
             <li className="sidebarListItem active">
               <LineStyle className="sidebarIcon" />
               Home

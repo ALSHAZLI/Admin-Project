@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./newProduct.css";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import { publicRequest ,userRequest} from "../../requestMethods";
 import Axios from "axios";
 export default function NewCategory() {
   const [inputs, setInputs] = useState({});
@@ -43,7 +44,7 @@ export default function NewCategory() {
 
 e.preventDefault()
 
-await Axios.post("http://localhost:3001/api/categories",formData);
+await userRequest.post("http://localhost:3001/api/categories",formData);
 document.getElementById('fileinput').value = null
 
 setFile(null)

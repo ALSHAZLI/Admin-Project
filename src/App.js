@@ -21,7 +21,9 @@ import Category from "./pages/category/Category";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"; 
+
+const NotFound = () => <h1>This is Nothing hear Sure!</h1>;
 
 var isLoggedIn = localStorage.getItem("zxcv");
 const ProtectedRoutes = ({isLoggedIn,redirectPath = "/login"}) =>{
@@ -35,45 +37,150 @@ const ProtectedRoutes = ({isLoggedIn,redirectPath = "/login"}) =>{
 function App() {
   // var admin = useSelector((state) => state.user.currentUser.is_admin);
   // var admin = null;
-  
+  var isLoggedIn = localStorage.getItem("zxcv");
+  const admin = useSelector((state) => state.zxcv);
 //  const auht = useSelector((state) => state.user.currentUser.is_admin = 1);
 
   return (
-    
+   
  <Router>
-
- 
-              <Topbar />
-            <div className="container">
-              <Sidebar />
-              <Routes >
-              <Route path="/login" exact element={<Login  /> } />
-             
-              
-              {/* <Route exact path="/" render={()=> this.auht ? <Home />   : <Login /> }/> */}
+    <Routes >
       
-          <Route element={<ProtectedRoutes isLoggedIn = {isLoggedIn}/>} >
-              <Route path="/" element={ <Home /> } />
-              <Route path="/users" element={<UserList />} />
-            
+    <Route  path="/" exact element={<Login  /> } />
+    
+    {isLoggedIn && (
+      <>
+          
               
-              
-              <Route path="/user/:userId" element= {<User />} />
-              <Route path="/newUser" element={<NewUser />} />
-              <Route path="/newCategory" element={<NewCategory />} />
-              <Route path="/products" element={<ProductList />}/>
-              <Route path="/product/:productId"  element={<Product />} /> 
-              <Route path="/category/:categoryId" element={<Category />} /> 
-              <Route path="/categories" element={<CategoriesList /> } /> 
-              <Route path="/newproduct" element={<NewProduct />} />
-              </Route>
+              <Route  path="/home" exact element={(
+                <>
+                <Topbar />
+                <div className="container">
+                <Sidebar />
+                 <Home /> 
+                 </div>
+                 </>
+                 )} />
+              <Route path="/users" element={ 
+                (
+                  <>
+                  <Topbar />
+                  <div className="container">
+                  <Sidebar />
+                   <UserList /> 
+                   </div>
+                   </>
+                   )
+              } />
+              <Route path="/user/:userId" element= {
+                 (
+                  <>
+                  <Topbar />
+                  <div className="container">
+                  <Sidebar />
+                   <User /> 
+                   </div>
+                   </>
+                   )
+              } />
+              <Route path="/newUser" element={ 
+                  (
+                    <>
+                    <Topbar />
+                    <div className="container">
+                    <Sidebar />
+                     <NewUser /> 
+                     </div>
+                     </>
+                     )
+                } />
+              <Route path="/newCategory" element={
+                  (
+                    <>
+                    <Topbar />
+                    <div className="container">
+                    <Sidebar />
+                     <NewCategory /> 
+                     </div>
+                     </>
+                     )
+                } />
+              <Route path="/products" element={
+                (
+                  <>
+                  <Topbar />
+                  <div className="container">
+                  <Sidebar />
+                   <ProductList /> 
+                   </div>
+                   </>
+                   )
+                }/>
+              <Route path="/product/:productId"  element={ 
+                 (
+                  <>
+                  <Topbar />
+                  <div className="container">
+                  <Sidebar />
+                   <Product /> 
+                   </div>
+                   </>
+                   )
+                } /> 
+              <Route path="/category/:categoryId" element={
+                (
+                  <>
+                  <Topbar />
+                  <div className="container">
+                  <Sidebar />
+                   <Category /> 
+                   </div>
+                   </>
+                   )
+                } /> 
+              <Route path="/categories" element={
+                (
+                  <>
+                  <Topbar />
+                  <div className="container">
+                  <Sidebar />
+                   <CategoriesList /> 
+                   </div>
+                   </>
+                   )
+               } /> 
+              <Route path="/newproduct" element={ 
+                (
+                  <>
+                  <Topbar />
+                  <div className="container">
+                  <Sidebar />
+                   <NewProduct /> 
+                   </div>
+                   </>
+                   )
+              } />
+             
+              </>   
+    )}
+    <Route path='*' element={<NotFound />} />
               </Routes >
               
-              </div>
+            
       
     </Router>
-    
+   
   );
 }
 
 export default App;
+
+
+       {/* <Topbar />
+            <div className="container">
+              <Sidebar /> */}
+              
+              {/* <Route exact path="/" render={()=> this.auht ? <Home />   : <Login /> }/> */}
+               {/* </div>
+              </>   */}
+              {/* )} */}

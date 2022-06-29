@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCats, getUsers } from "../../redux/apiCalls";
 import { useEffect, useState } from "react";
-import { publicRequest } from "../../requestMethods";
+import { publicRequest ,userRequest} from "../../requestMethods";
 import "./productList.css";
 import {format} from "timeago.js"
 
@@ -23,7 +23,7 @@ export default function ProductList() {
   useEffect(() => {
     const getCats = async () => {
       try {
-        const res = await publicRequest.get("categories");
+        const res = await userRequest.get("categories");
         setCats(res.data);
       } catch {}
     };

@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./newProduct.css";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import { publicRequest ,userRequest} from "../../requestMethods";
 import Axios from "axios";
 export default function NewProduct() {
   const [inputs, setInputs] = useState({});
@@ -49,7 +50,7 @@ export default function NewProduct() {
 
 e.preventDefault()
 
-await Axios.post("http://localhost:3001/api/products",formData);
+await userRequest.post("http://localhost:3001/api/products",formData);
 document.getElementById('fileinput').value = null
 
 setFile(null)

@@ -22,11 +22,22 @@ export default function Product() {
 
   const [Product, setProducts] = useState([]);
 
+
   useEffect(() => {
-    Axios.get(`http://localhost:3001/api/products/${productId}`).then((response) => {
-      setProducts(response.data);
-    });
-  },[]);
+    const getPats = async () => {
+      try {
+        const res = await userRequest.get(`products/${productId}`);
+        setProducts(res.data);
+      } catch {}
+    };
+    getPats();
+  }, []);
+
+  // useEffect(() => {
+  //   Axios.get(`http://localhost:3001/api/products/${productId}`).then((response) => {
+  //     setProducts(response.data);
+  //   });
+  // },[]);
 
  var myObject =  Product.category
 

@@ -54,7 +54,7 @@ export const login = async (dispatch, user) => {
 export const getProducts = async (dispatch) => {
   dispatch(getProductStart());
   try {
-    const res = await publicRequest.get("/products");
+    const res = await userRequest.get("/products");
     dispatch(getProductSuccess(res.data));
   } catch (err) {
     dispatch(getProductFailure());
@@ -74,7 +74,7 @@ export const getCat = async (dispatch) => {
 export const getOneProducts = async (id,dispatch) => {
   dispatch(getProductStart());
   try {
-    const res = await publicRequest.get(`/products/${id}`);
+    const res = await userRequest.get(`/products/${id}`);
     dispatch(getProductSuccess(res.data));
   } catch (err) {
     dispatch(getProductFailure());
